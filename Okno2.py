@@ -52,13 +52,23 @@ class Dodawanie():
     def Dodawanie(self):
         print('a')
         var1 = str(self.get_1.get())
-        var2 = str(self.get_2.get())
+        var2 = int(self.get_2.get())
+        #Lista otrzymuje 1 tom
         mycursor.execute(''' UPDATE `Mangi` SET `Ilość` = Ilość + 1 WHERE `Nazwa_Mangi` = ? ''', [var1])
+        #cena całkowita jest powiększana o dany tom
         mycursor.execute('''SELECT `Cena` FROM `mangi` WHERE `Nazwa_Mangi` = ?''',[var1])
+        result1 = [item[0] for item in mycursor.fetchall()]
+        if result1[0] > 5:
+            mycursor.execute(''' UPDATE `Mangi` SET `Cała_Cena` = Cała_Cena + ? WHERE `Nazwa_Mangi` = ? ''', [result1[0],var1])
+        #dodano tom do 'Od_do'
+        mycursor.execute('''SELECT `Do` FROM `mangi` WHERE `Nazwa_Mangi` = ?''', [var1])
+        result2 = [item[0] for item in mycursor.fetchall()]
+        if result2[0] > var2:
+            mycursor.execute(''' UPDATE `Mangi` SET `Od` = ? WHERE `Nazwa_Mangi` = ? ''', [var2,var1])
+        else:
+            mycursor.execute(''' UPDATE `Mangi` SET `Do` = ? WHERE `Nazwa_Mangi` = ? ''', [var2,var1])
         t.commit()
-        result = [item[0] for item in mycursor.fetchall()]
-        if result[0] > 5:
-            mycursor.execute(''' UPDATE `Mangi` SET `Cała_Cena` = Cała_Cena + ? WHERE `Nazwa_Mangi` = ? ''', [result[0],var1])
+
 
 b=Dodawanie()
 b.Ustawienia()

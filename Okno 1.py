@@ -4,8 +4,8 @@ import sqlite3
 t = sqlite3.connect('database.db')
 
 mycursor = t.cursor()
-#mycursor.execute('''INSERT INTO `Mangi`(`Nazwa_Mangi`, `Ilość`,'Od_do', `Cena`, `Cała_Cena`) VALUES ('No.6',5,'1-5', 19.47, 97.35)''')
-#mycursor.execute('''CREATE TABLE Mangi (Nazwa_Mangi VARCHAR(30), Ilość INT(31), Od_do VARCHAR(32), Cena INT(33), Cała_Cena INT(34))''')
+#mycursor.execute('''INSERT INTO `Mangi`(`Nazwa_Mangi`, `Ilość`,`Od`,`Do`, `Cena`, `Cała_Cena`) VALUES ('No.6', 5, 3, 5, 19.47, 97.35)''')
+#mycursor.execute('''CREATE TABLE Mangi (Nazwa_Mangi VARCHAR(30), Ilość INT(31), Od INT(32), Do INT(32),Cena INT(33), Cała_Cena INT(34))''')
 mycursor.execute('''SELECT * FROM `mangi` WHERE 1''')
 t.commit()
 result = mycursor.fetchall()
