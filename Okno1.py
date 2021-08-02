@@ -4,9 +4,15 @@ from Okno2 import *
 from Okno3 import *
 import sqlite3
 
+full = 0
+
 t = sqlite3.connect('database.db')
 
 mycursor = t.cursor()
+mycursor.execute('''SELECT `Cała_Cena` FROM `Mangi`''')
+result = [item[0] for item in mycursor.fetchall()]
+for j in result:
+    full = full+j
 t.commit()
 
 class Main():
@@ -21,14 +27,9 @@ class Main():
         self.root.geometry('500x700')
 
     def Okno(self):
-        self.Label_Number_1 = Label(self.root, text="Mangi", fg="#8E7719", bg="#1B1324")
+        self.Label_Number_1 = Label(self.root, text='całkowita cena: {}'.format(full), fg="#8E7719", bg="#1B1324")
         self.Label_Number_1.config(font=("Courier", 20, "bold"))
-        self.Label_Number_1.place(relx=0.3, rely=0)
-
-        self.text1 = "kjffsfajfja"
-        self.Label_Number_2 = Label(self.root, text=self.text1, fg="#8E7719", bg="#1B1324")
-        self.Label_Number_2.config(font=("Courier", 10, "bold"))
-        self.Label_Number_2.place(relx=0.06, rely=0.1)
+        self.Label_Number_1.place(relx=0.1, rely=0)
 
         self.button1 = Button(self.root, text="Lista Mang", fg="black", padx=80, pady=5, command=self.Lista)
         self.button1.place(relx=0.219, rely=0.17)

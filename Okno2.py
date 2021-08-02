@@ -57,7 +57,7 @@ class Dodawanie():
         if result1[0] > 5:
             mycursor.execute(''' UPDATE `Mangi` SET `Cała_Cena` = Cała_Cena + ? WHERE `Nazwa_Mangi` = ? ''', [result1[0],var1])
         #dodano tom do 'Od_do'
-        mycursor.execute('''SELECT `Do` FROM `mangi` WHERE `Nazwa_Mangi` = ?''', [var1])
+        mycursor.execute('''SELECT `Do` FROM `Mangi` WHERE `Nazwa_Mangi` = ?''', [var1])
         result2 = [item[0] for item in mycursor.fetchall()]
         if result2[0] > var2:
             mycursor.execute(''' UPDATE `Mangi` SET `Od` = ? WHERE `Nazwa_Mangi` = ? ''', [var2,var1])
