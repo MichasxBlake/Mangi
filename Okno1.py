@@ -1,13 +1,12 @@
 from tkinter import *
 from Lista import *
 from Okno2 import *
+from Okno3 import *
 import sqlite3
 
 t = sqlite3.connect('database.db')
 
 mycursor = t.cursor()
-#mycursor.execute('''INSERT INTO `Mangi`(`Nazwa_Mangi`, `Ilość`,`Od`,`Do`, `Cena`, `Cała_Cena`) VALUES ('No.6', 5, 3, 5, 19.47, 97.35)''')
-#mycursor.execute('''CREATE TABLE Mangi (Nazwa_Mangi VARCHAR(30), Ilość INT(31), Od INT(32), Do INT(32),Cena INT(33), Cała_Cena INT(34))''')
 t.commit()
 
 class Main():
@@ -35,6 +34,8 @@ class Main():
         self.button1.place(relx=0.219, rely=0.17)
         self.button2 = Button(self.root, text="Dodawanie Mang", fg="black", padx=80, pady=5, command=self.Okno2)
         self.button2.place(relx=0.219, rely=0.30)
+        self.button2 = Button(self.root, text="Admin", fg="black", padx=80, pady=5, command=self.Okno3)
+        self.button2.place(relx=0.219, rely=0.60)
 
     def Start(self):
         self.root.mainloop()
@@ -52,6 +53,13 @@ class Main():
         b.Ustawienia()
         b.Okno()
         b.Start()
+
+    def Okno3(self):
+        f = Admin()
+        f.root2 = Tk()
+        f.Ustawienia()
+        f.Widok()
+
 
 a=Main()
 a.Ustawienia()
