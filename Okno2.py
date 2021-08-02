@@ -9,18 +9,14 @@ var2 = 0
 
 class Dodawanie():
 
-    def __init__(self,root1 = Tk()):
-        self.root1 = root1
+    #def __init__(self,root1 = Tk()):
+        #self.root1 = root1
 
     def Ustawienia(self):
         self.root1.title("Mangi")
         self.root1.config(bg = "#1B1324")
         self.root1.resizable(width=False, height=False)
         self.root1.geometry('500x700')
-
-    def Okno3(self):
-        c = Add()
-        c.Dodawanie()
 
     def Okno(self):
         self.Label_Number_1 = Label(self.root1, text="Mangi", fg="#8E7719", bg="#1B1324")
@@ -68,9 +64,3 @@ class Dodawanie():
         else:
             mycursor.execute(''' UPDATE `Mangi` SET `Do` = ? WHERE `Nazwa_Mangi` = ? ''', [var2,var1])
         t.commit()
-
-
-b=Dodawanie()
-b.Ustawienia()
-b.Okno()
-b.Start()

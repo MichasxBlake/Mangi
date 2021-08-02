@@ -8,8 +8,8 @@ c.execute("SELECT * FROM Mangi")
 
 class Lista:
 
-    def __init__(self, zol=Tk()):
-        self.zol = zol
+    #def __init__(self, zol=Tk()):
+        #self.zol = zol
 
     def v(self):
         self.zol.title("Lista Mang")
@@ -36,8 +36,3 @@ for row in templist:
 
 total_rows = len(lst)
 total_columns = len(lst[0])
-
-t = Lista()
-t.v()
-t.Enter()
-t.z()

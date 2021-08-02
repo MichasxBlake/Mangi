@@ -1,4 +1,6 @@
 from tkinter import *
+from Lista import *
+from Okno2 import *
 import sqlite3
 
 t = sqlite3.connect('database.db')
@@ -6,11 +8,7 @@ t = sqlite3.connect('database.db')
 mycursor = t.cursor()
 #mycursor.execute('''INSERT INTO `Mangi`(`Nazwa_Mangi`, `Ilość`,`Od`,`Do`, `Cena`, `Cała_Cena`) VALUES ('No.6', 5, 3, 5, 19.47, 97.35)''')
 #mycursor.execute('''CREATE TABLE Mangi (Nazwa_Mangi VARCHAR(30), Ilość INT(31), Od INT(32), Do INT(32),Cena INT(33), Cała_Cena INT(34))''')
-mycursor.execute('''SELECT * FROM `mangi` WHERE 1''')
 t.commit()
-result = mycursor.fetchall()
-for r in result:
-    print(r)
 
 class Main():
 
@@ -33,10 +31,30 @@ class Main():
         self.Label_Number_2.config(font=("Courier", 10, "bold"))
         self.Label_Number_2.place(relx=0.06, rely=0.1)
 
+        self.button1 = Button(self.root, text="Lista Mang", fg="black", padx=80, pady=5, command=self.Lista)
+        self.button1.place(relx=0.219, rely=0.17)
+        self.button2 = Button(self.root, text="Dodawanie Mang", fg="black", padx=80, pady=5, command=self.Okno2)
+        self.button2.place(relx=0.219, rely=0.30)
+
     def Start(self):
         self.root.mainloop()
 
-a =Main()
+    def Lista(self):
+        d = Lista()
+        d.zol = Tk()
+        d.v()
+        d.Enter()
+        d.z()
+
+    def Okno2(self):
+        b = Dodawanie()
+        b.root1 = Tk()
+        b.Ustawienia()
+        b.Okno()
+        b.Start()
+
+a=Main()
 a.Ustawienia()
 a.Okno()
 a.Start()
+t.close()
