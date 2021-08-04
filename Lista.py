@@ -1,10 +1,10 @@
 from tkinter import *
 import sqlite3
 
+
 t = sqlite3.connect('database.db')
 
 c = t.cursor()
-c.execute("SELECT * FROM Mangi")
 
 class Lista:
 
@@ -16,23 +16,23 @@ class Lista:
         self.zol.config(bg="#1B1324")
         self.zol.resizable(width=False, height=False)
 
+    def z(self):
+        c.execute("SELECT * FROM `%s`" % (login))
+        self.lst = []
+        templist = c.fetchall()
+        my_columns = 0
+        for row in templist:
+            self.lst.append(row)
+            my_columns += 1
+
+        self.total_rows = len(self.lst)
+        self.total_columns = len(self.lst[0])
+        self.zol.mainloop()
+
     def Enter(self):
-        for i in range(total_rows):
-            for j in range(total_columns):
+        for i in range(self.total_rows):
+            for j in range(self.total_columns):
 
                 self.e = Entry(self.zol, width=20, fg='black', font=('Arial', 16, 'bold'))
                 self.e.grid(row=i, column=j)
-                self.e.insert(END, lst[i][j])
-
-    def z(self):
-        self.zol.mainloop()
-
-lst = []
-templist = c.fetchall()
-my_columns = 0
-for row in templist:
-    lst.append(row)
-    my_columns += 1
-
-total_rows = len(lst)
-total_columns = len(lst[0])
+                self.e.insert(END, self.lst[i][j])

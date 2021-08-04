@@ -5,9 +5,11 @@ import sqlite3
 t = sqlite3.connect('database.db')
 mycursor = t.cursor()
 
+global login
 test = 0
 var1 = 0
 var2 = 0
+
 
 class Dodawanie():
 
@@ -51,24 +53,24 @@ class Dodawanie():
     def Dodawanie(self):
         var1 = str(self.get_1.get())
         #Lista otrzymuje 1 tom
-        mycursor.execute('''SELECT `Nazwa_Mangi` FROM `mangi`''')
+        mycursor.execute('''SELECT `Nazwa_Mangi` FROM `s%`'''%(login))
         result = [item[0] for item in mycursor.fetchall()]
         for i in result:
             if var1 == i:
                 var2 = int(self.get_2.get())
-                mycursor.execute(''' UPDATE `Mangi` SET `Ilość` = Ilość + 1 WHERE `Nazwa_Mangi` = ? ''', [var1])
+                mycursor.execute(''' UPDATE `%s` SET `Ilość` = Ilość + 1 WHERE `Nazwa_Mangi` = ? '''% (login), [var1])
                 #cena całkowita jest powiększana o dany tom
-                mycursor.execute('''SELECT `Cena` FROM `mangi` WHERE `Nazwa_Mangi` = ?''',[var1])
+                mycursor.execute('''SELECT `Cena` FROM `%s` WHERE `Nazwa_Mangi` = ?'''%(login),[var1])
                 result1 = [item[0] for item in mycursor.fetchall()]
                 if result1[0] > 5:
-                    mycursor.execute(''' UPDATE `Mangi` SET `Cała_Cena` = Cała_Cena + ? WHERE `Nazwa_Mangi` = ? ''', [result1[0],var1])
+                    mycursor.execute(''' UPDATE `%s` SET `Cała_Cena` = Cała_Cena + ? WHERE `Nazwa_Mangi` = ? '''%(login), [result1[0],var1])
                 #dodano tom do 'Od_do'
-                mycursor.execute('''SELECT `Do` FROM `Mangi` WHERE `Nazwa_Mangi` = ?''', [var1])
+                mycursor.execute('''SELECT `Do` FROM `%s` WHERE `Nazwa_Mangi` = ?'''%(login), [var1])
                 result2 = [item[0] for item in mycursor.fetchall()]
                 if result2[0] > var2:
-                    mycursor.execute(''' UPDATE `Mangi` SET `Od` = ? WHERE `Nazwa_Mangi` = ? ''', [var2,var1])
+                    mycursor.execute(''' UPDATE `%s` SET `Od` = ? WHERE `Nazwa_Mangi` = ? '''%(login), [var2,var1])
                 else:
-                    mycursor.execute(''' UPDATE `Mangi` SET `Do` = ? WHERE `Nazwa_Mangi` = ? ''', [var2,var1])
+                    mycursor.execute(''' UPDATE `%s` SET `Do` = ? WHERE `Nazwa_Mangi` = ? '''%(login), [var2,var1])
                 t.commit()
             else:
                 self.test=self.test+1

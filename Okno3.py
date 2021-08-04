@@ -1,5 +1,6 @@
 from tkinter import *
 import sqlite3
+global login
 
 t = sqlite3.connect('database.db')
 mycursor = t.cursor()
@@ -62,6 +63,6 @@ class Admin():
         var4 = str(self.get_4.get())
         var5 = str(self.get_5.get())
         var6 = str(self.get_6.get())
-        mycursor.execute('''INSERT INTO `Mangi`(`Nazwa_Mangi`,`Ilość`,`Od`,`Do`,`Cena`,`Cała_Cena`) VALUES (?,?,?,?,?,?)''',[var1,var2,var3,var4,var5,var6])
+        mycursor.execute('''INSERT INTO `%s`(`Nazwa_Mangi`,`Ilość`,`Od`,`Do`,`Cena`,`Cała_Cena`) VALUES (?,?,?,?,?,?)'''%(login),[var1,var2,var3,var4,var5,var6])
         t.commit()
 

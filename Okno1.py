@@ -4,21 +4,15 @@ from Okno2 import *
 from Okno3 import *
 import sqlite3
 
+
 full = 0
 
 t = sqlite3.connect('database.db')
 
 mycursor = t.cursor()
-mycursor.execute('''SELECT `Cała_Cena` FROM `Mangi`''')
-result = [item[0] for item in mycursor.fetchall()]
-for j in result:
-    full = full+j
 t.commit()
 
 class Main():
-
-    def __init__(self,root = Tk()):
-        self.root = root
 
     def Ustawienia(self):
         self.root.title("Mangi")
@@ -60,10 +54,3 @@ class Main():
         f.root2 = Tk()
         f.Ustawienia()
         f.Widok()
-
-
-a=Main()
-a.Ustawienia()
-a.Okno()
-a.Start()
-t.close()
