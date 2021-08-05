@@ -57,6 +57,9 @@ class Admin():
         self.root2.mainloop()
 
     def Akceptuj(self):
+        file=open('file.txt','r')
+        login=file.read()
+        file.close()
         var1 = str(self.get_1.get())
         var2 = str(self.get_2.get())
         var3 = str(self.get_3.get())

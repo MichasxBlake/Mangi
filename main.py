@@ -38,8 +38,26 @@ class Head():
         self.button_accept1 = Button(self.root4, text="Zaloguj", fg="black", padx=80, pady=5, command=self.Logowanie)
         self.button_accept1.place(relx=0.219, rely=0.17)
 
+        self.Label_Number_2 = Label(self.root4, text='Rejestracja',fg="#8E7719", bg="#1B1324")
+        self.Label_Number_2.config(font=("Courier", 20, "bold"))
+        self.Label_Number_2.place(relx=0.1, rely=0.23)
+        self.text3 = Label(self.root4, text="Podaj Login:", fg="#8E7719", bg="#1B1324")
+        self.text3.config(font=("Courier", 14, "bold"))
+        self.text3.place(relx=0, rely=0.30)
+        self.get_3 = Entry(self.root4, bg="white")
+        self.get_3.place(relx=0.5, rely=0.30)
+        self.text4 = Label(self.root4, text="Podaj Hasło:", fg="#8E7719", bg="#1B1324")
+        self.text4.config(font=("Courier", 14, "bold"))
+        self.text4.place(relx=0, rely=0.34)
+        self.get_4 = Entry(self.root4, bg="white")
+        self.get_4.place(relx=0.5, rely=0.34)
+        self.button_accept2 = Button(self.root4, text="Zarejestruj", fg="black", padx=80, pady=5, command=self.Rejestracja)
+        self.button_accept2.place(relx=0.219, rely=0.38)
+
     def Logowanie(self):
         login = str(self.get_1.get())
+        file=open('file.txt','w')
+        file.write(login)
         haslo = str(self.get_2.get())
         mycursor.execute('''SELECT `Login` FROM `Login`''')
         result = [item[0] for item in mycursor.fetchall()]
@@ -54,9 +72,15 @@ class Head():
                         a.root = Tk()
                         a.Ustawienia()
                         a.Okno()
+                        file.close()
                         a.Start()
                         t.close()
-                self.root4.destroy()
+                        quit()
+    def Rejestracja(self):
+        re_login = str(self.get_3.get())
+        re_haslo = str(self.get_4.get())
+        mycursor.execute('''INSERT INTO `Login`(`Login`,`HASŁO`) VALUES (?,?)''',(re_login,re_haslo))
+        t.commit()
 
     def Start(self):
         self.root4.mainloop()

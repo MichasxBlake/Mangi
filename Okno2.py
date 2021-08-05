@@ -5,7 +5,6 @@ import sqlite3
 t = sqlite3.connect('database.db')
 mycursor = t.cursor()
 
-global login
 test = 0
 var1 = 0
 var2 = 0
@@ -52,8 +51,10 @@ class Dodawanie():
 
     def Dodawanie(self):
         var1 = str(self.get_1.get())
+        file=open('file.txt','r')
+        login = file.read()
         #Lista otrzymuje 1 tom
-        mycursor.execute('''SELECT `Nazwa_Mangi` FROM `s%`'''%(login))
+        mycursor.execute('''SELECT `Nazwa_Mangi` FROM `%s`'''%(login))
         result = [item[0] for item in mycursor.fetchall()]
         for i in result:
             if var1 == i:
@@ -79,4 +80,6 @@ class Dodawanie():
             error.root3 = Tk()
             error.Ustawienia()
             error.Okno()
+            file.close()
             error.Start()
+            quit()
