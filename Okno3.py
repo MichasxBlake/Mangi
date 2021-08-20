@@ -1,5 +1,6 @@
 from tkinter import *
 import sqlite3
+from Okienka import Zmienna_Error
 global login
 
 t = sqlite3.connect('database.db')
@@ -44,11 +45,6 @@ class Admin():
         self.text5.place(relx=0, rely=0.21)
         self.get_5 = Entry(self.root2, bg="white")
         self.get_5.place(relx=0.5, rely=0.182)
-        self.text6 = Label(self.root2, text="Cała Cena", fg="#8E7719", bg="#1B1324")
-        self.text6.config(font=("Courier", 14, "bold"))
-        self.text6.place(relx=0, rely=0.25)
-        self.get_6 = Entry(self.root2, bg="white")
-        self.get_6.place(relx=0.5, rely=0.211)
 
         self.button_accept1 = Button(self.root2, text="Accept", fg="black", padx=80, pady=5, command=self.Akceptuj)
         self.button_accept1.place(relx=0.219, rely=0.30)
@@ -57,15 +53,30 @@ class Admin():
         self.root2.mainloop()
 
     def Akceptuj(self):
+        kod = False
         file=open('file.txt','r')
         login=file.read()
         file.close()
-        var1 = str(self.get_1.get())
-        var2 = str(self.get_2.get())
-        var3 = str(self.get_3.get())
-        var4 = str(self.get_4.get())
-        var5 = str(self.get_5.get())
-        var6 = str(self.get_6.get())
-        mycursor.execute('''INSERT INTO `%s`(`Nazwa_Mangi`,`Ilość`,`Od`,`Do`,`Cena`,`Cała_Cena`) VALUES (?,?,?,?,?,?)'''%(login),[var1,var2,var3,var4,var5,var6])
-        t.commit()
+        var1 = self.get_1.get()
+        var2 = self.get_2.get()
+        var3 = self.get_3.get()
+        var4 = self.get_4.get()
+        var5 = self.get_5.get()
+        try:
+            var6 = int(var2) * int(var5)
+            kod = True
+        except ValueError:
+            kod = False
+
+        if kod == True:
+            mycursor.execute('''INSERT INTO `%s`(`Nazwa_Mangi`,`Ilość`,`Od`,`Do`,`Cena`,`Cała_Cena`) VALUES (?,?,?,?,?,?)''' % (login), [var1, str(var2), var3, var4, str(var5), str(var6)])
+            t.commit()
+        else:
+            error = Zmienna_Error()
+            error.root3 = Tk()
+            error.Ustawienia()
+            error.Okno()
+            file.close()
+            error.Start()
+            quit()
 

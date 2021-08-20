@@ -27,9 +27,9 @@ class Main():
 
         self.button1 = Button(self.root, text="Lista Mang", fg="black", padx=80, pady=5, command=self.Lista)
         self.button1.place(relx=0.219, rely=0.17)
-        self.button2 = Button(self.root, text="Dodawanie Mang", fg="black", padx=80, pady=5, command=self.Okno2)
+        self.button2 = Button(self.root, text="Dodawanie Tomu", fg="black", padx=80, pady=5, command=self.Okno2)
         self.button2.place(relx=0.219, rely=0.30)
-        self.button2 = Button(self.root, text="Admin", fg="black", padx=80, pady=5, command=self.Okno3)
+        self.button2 = Button(self.root, text="Dodawanie Mang", fg="black", padx=80, pady=5, command=self.Okno3)
         self.button2.place(relx=0.219, rely=0.60)
 
     def Start(self):
