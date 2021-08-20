@@ -1,5 +1,5 @@
 from tkinter import *
-from Błąd import Error
+from Okienka import Error
 import sqlite3
 
 t = sqlite3.connect('database.db')

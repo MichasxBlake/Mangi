@@ -1,5 +1,6 @@
 import sqlite3
 from tkinter import *
+from Okienka import Login_Error, Haslo_Error
 from Okno1 import *
 
 t = sqlite3.connect('database.db')
@@ -55,6 +56,8 @@ class Head():
         self.button_accept2.place(relx=0.219, rely=0.38)
 
     def Logowanie(self):
+        a = 0
+        b = 0
         login = str(self.get_1.get())
         file=open('file.txt','w')
         file.write(login)
@@ -76,6 +79,28 @@ class Head():
                         a.Start()
                         t.close()
                         quit()
+                    else:
+                        b = b+1
+            else:
+                a = a+1
+
+        if len(result) == a:
+            error = Login_Error()
+            error.root3 = Tk()
+            error.Ustawienia()
+            error.Okno()
+            error.Start()
+            quit()
+
+        if len(result1) == b:
+            error = Haslo_Error()
+            error.root3 = Tk()
+            error.Ustawienia()
+            error.Okno()
+            file.close()
+            error.Start()
+            quit()
+
     def Rejestracja(self):
         re_login = str(self.get_3.get())
         re_haslo = str(self.get_4.get())
